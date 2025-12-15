@@ -1,0 +1,18 @@
+{
+  "manifest_version": 3,
+  "name": "Ideas inspiration",
+  "version": "1.0.0",
+  "description": "simply a chrome extension: that replaces your home tab with a feed of cool news about your topics of interest and some research papers (for inspiration) then there's a create new idea and some tools to help you make it evolve",
+  
+  "action": {
+    "default_popup": "popup.html",
+    "default_title": ""
+  },
+
+  "chrome_url_overrides": {
+    "newtab": "newtab.html"
+  },
+  
+
+  "permissions": []
+}

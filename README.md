@@ -2,5 +2,3 @@ simply a chrome extension: that replaces your home tab with a feed of cool news 
 
 NewTab: for the feed and your ideas dashboard
 Popup: to add ideas on the fly
-
-# Ideas-system
