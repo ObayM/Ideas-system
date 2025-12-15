@@ -1,6 +1,7 @@
 
 import  { useState, useEffect } from 'react';
 import Onboarding from './components/Onboarding';
+import Feed from './components/Feed/index';
 
 function NewTab() {
   const [showOnboarding, setShowOnboarding] = useState(false);
@@ -39,10 +40,9 @@ function NewTab() {
   }
 
   return (
-    <div className="min-h-screen bg-neutral-900 text-white p-8">
-      <h1 className="text-3xl font-bold">Your feed</h1>
-      <p className="mt-4 text-neutral-400">Feed content coming soon(tm)...</p>
-    </div>
+    <>
+    <Feed />
+    </>
   );
 }
 
