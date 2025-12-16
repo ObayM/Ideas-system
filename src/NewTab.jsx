@@ -6,12 +6,15 @@ import Feed from './components/Feed/index';
 import { Plus } from 'lucide-react';
 import CreateIdeaModal from './components/Ideas/CreateIdeaModal';
 import IdeaCard from './components/Ideas/IdeaCard';
+import IdeaPage from './components/Ideas/IdeaPage';
+
 
 function NewTab() {
   const [showOnboarding, setShowOnboarding] = useState(false);
   const [loading, setLoading] = useState(true);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [ideas, setIdeas] = useState([]);
+  const [activeIdeaId, setActiveIdeaId] = useState(null);
 
   useEffect(() => {
 
@@ -47,6 +50,17 @@ function NewTab() {
     localStorage.setItem('user_ideas', JSON.stringify(CompleteIdeas));
   }
 
+  const handleUpdateIdea = (updatedIdea) => {
+
+    const updatedIdeas = ideas.map(idea =>
+      idea.id === updatedIdea.id ? updatedIdea : idea
+    );
+
+    setIdeas(updatedIdeas);
+    localStorage.setItem('user_ideas', JSON.stringify(updatedIdeas));
+  };
+
+
   if (loading){
     return (
       <div className='min-h-screen flex items-center justify-center text-2xl'>
@@ -62,6 +76,19 @@ function NewTab() {
 
   }
   
+  if (activeIdeaId) {
+    const activeIdea = ideas.find(i => i.id === activeIdeaId);
+    if (activeIdea) {
+      return (
+        <IdeaPage
+          idea={activeIdea}
+          onBack={() => setActiveIdeaId(null)}
+          onUpdate={handleUpdateIdea}
+        />
+      );
+    }
+  }
+
 
   return (
     <div className='min-h-screen bg-neutral-900 text-white'>
@@ -86,7 +113,9 @@ function NewTab() {
 
           <div className='grid grid-cols gap-6 md:grid-cols-2 lg:grid-cols-3'>
             {ideas.slice(0, 3).map((idea) => (
-              <IdeaCard key={idea.id} idea={idea} />
+              <div key={idea.id} onClick={() => setActiveIdeaId(idea.id)}>
+                <IdeaCard idea={idea} />
+              </div>
             ))}
           </div>
 
